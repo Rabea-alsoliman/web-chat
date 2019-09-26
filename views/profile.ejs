@@ -1,0 +1,40 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar') %>
+
+<div class="container">
+    <div class="row">
+        <div class="col col-12 col-md-4">
+            <img src="/<%= userimage%>">
+        </div>
+        <div class="col col-12 col-md-6">
+            <h3><%= username%></h3>
+            <% if(!isOwner) { %>
+                <form method="POST">
+                    <input type="hidden" name="myId" value="<%= myId%>">
+                    <input type="hidden" name="myName" value="<%= myName%>">
+                    <input type="hidden" name="myImage" value="<%= myImage%>">
+                    <input type="hidden" name="friendId" value="<%= friendId%>">
+                    <input type="hidden" name="friendImage" value="<%= userImage%>">
+                    <input type="hidden" name="friendName" value="<%= userName%>">
+                    <% if(isFriends) { %>
+                        <input type="submit" name="Delete Friend" class="btn btn-danger" formaction="/friend/delete">
+                    <% } else if(isRequestSent) { %>             
+                        <input type="submit" name="Cancel Request" class="btn btn-danger" formaction="/friend/cancel">
+                    <% } else if(isRequestRecived) { %>
+                        <input type="submit" name="Accept Friend Request" class="btn btn-success" formaction="/friend/accept">
+                        <input type="submit" name="Reject" class="btn btn-danger" formaction="/friend/reject">
+                    <% } else { %>
+                        <input type="submit" name="Add Friend" class="btn btn-primary" formaction="/friend/add">
+                    <% } %>
+                </form>
+            <% } %>    
+        </div>
+    </div>
+</div>
+
+<%- include('parts/scripts') %>
+
+
+</body>
+</html>
+
