@@ -39,6 +39,14 @@ td {
     padding: 10px;
 }
 
+.drop-nav {
+    margin-right: 9px;
+}
+
+.drop-nav span {
+    margin-left: 13px;
+}
+
 body {
     padding-bottom: 20px;
 }
@@ -47,3 +55,4 @@ textarea.form-control {
     height: 120px;
     resize: none;
 }
+

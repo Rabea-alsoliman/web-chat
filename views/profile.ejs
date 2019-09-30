@@ -4,27 +4,27 @@
 <div class="container">
     <div class="row">
         <div class="col col-12 col-md-4">
-            <img src="/<%= userimage%>">
+            <img src="/<%= userImage%>">
         </div>
         <div class="col col-12 col-md-6">
             <h3><%= username%></h3>
             <% if(!isOwner) { %>
-                <form method="POST">
-                    <input type="hidden" name="myId" value="<%= myId%>">
-                    <input type="hidden" name="myName" value="<%= myName%>">
-                    <input type="hidden" name="myImage" value="<%= myImage%>">
-                    <input type="hidden" name="friendId" value="<%= friendId%>">
-                    <input type="hidden" name="friendImage" value="<%= userImage%>">
-                    <input type="hidden" name="friendName" value="<%= userName%>">
+                <form method="POST" id="friends-from">
+                    <input id="myId" type="hidden" name="myId" value="<%= myId%>">
+                    <input id="myName" type="hidden" name="myName" value="<%= myName%>">
+                    <input id="myImage" type="hidden" name="myImage" value="<%= myImage%>">
+                    <input id="friendId" type="hidden" name="friendId" value="<%= friendId%>">
+                    <input id="friendName" type="hidden" name="friendName" value="<%= username%>">
+                    <input id="friendImage" type="hidden" name="friendImage" value="<%= userImage%>">
                     <% if(isFriends) { %>
-                        <input type="submit" name="Delete Friend" class="btn btn-danger" formaction="/friend/delete">
+                        <input type="submit" value="Delete Friend" class="btn btn-danger" formaction="/friend/delete">
                     <% } else if(isRequestSent) { %>             
-                        <input type="submit" name="Cancel Request" class="btn btn-danger" formaction="/friend/cancel">
-                    <% } else if(isRequestRecived) { %>
-                        <input type="submit" name="Accept Friend Request" class="btn btn-success" formaction="/friend/accept">
-                        <input type="submit" name="Reject" class="btn btn-danger" formaction="/friend/reject">
+                        <input type="submit" value="Cancel Request" class="btn btn-danger" formaction="/friend/cancel">
+                    <% } else if(isRequestRecieved) { %>
+                        <input type="submit" value="Accept Friend Request" class="btn btn-success" formaction="/friend/accept">
+                        <input type="submit" value="Reject" class="btn btn-danger" formaction="/friend/reject">
                     <% } else { %>
-                        <input type="submit" name="Add Friend" class="btn btn-primary" formaction="/friend/add">
+                        <input id="addBtn" type="submit" value="Add Friend" class="btn btn-primary">
                     <% } %>
                 </form>
             <% } %>    
@@ -33,8 +33,11 @@
 </div>
 
 <%- include('parts/scripts') %>
-
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/sockets/init.js"></script>
+<% if(!isOwner && !isFriends && !isRequestSent && !isRequestRecieved) { %>
+    <script src="/js/sockets/friend.js"></script>
+<% } %>
 
 </body>
 </html>
-
