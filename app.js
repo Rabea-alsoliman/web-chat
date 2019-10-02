@@ -8,6 +8,7 @@ const homeRouter = require('./routes/home.route');
 const authRouter = require('./routes/auth.route');
 const profileRouter = require('./routes/profile.route');
 const friendRouter = require('./routes/friend.route');
+const chatRouter = require('./routes/chat.route');
 
 const getFriendRequests = require('./models/user.model').getFriendRequests;
 
@@ -20,7 +21,8 @@ const io = socketIO(server);
 io.onlineUsers = {};
 
 require('./sockets/friend.socket')(io);
-require('./sockets/init.socket')(io);    
+require('./sockets/init.socket')(io);
+require('./sockets/chat.socket')(io);    
 
 
 app.use(express.static(path.join(__dirname, 'assets')));
@@ -60,6 +62,7 @@ app.use("/", homeRouter);
 app.use("/", authRouter);
 app.use("/profile", profileRouter);
 app.use("/friend", friendRouter);
+app.use("/chat", chatRouter);
 
 app.get('/error', (req, res, next) => {
     res.status(500)

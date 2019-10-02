@@ -1,7 +1,8 @@
 // this file will initlize socketIO in any where in clinte  
-const btn = document.getElementById('friendRequestsDropdown');
-const myId = document.getElementById('userId').value;
 const socket = io();
+const btn = document.getElementById('friendRequestsDropdown');
+let myId = document.getElementById('userId').value;
+
 
 socket.on("connect", () => {
     socket.emit('joinNotificationsRoom', myId);
@@ -23,6 +24,7 @@ socket.on('newFriendRequest', data => {
     btn.classList.add('btn-danger');
     
 });
+
 
 document.getElementById('friendRequestsDropdown').onclick = () => {
     btn.classList.remove('btn-danger');
