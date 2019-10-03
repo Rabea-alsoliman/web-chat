@@ -17,7 +17,7 @@ exports.getMessages = async chatId => {
         await mongoose.connect(DB_URL);
         let messages = await Message.find({chat: chatId}, null, {
             sort: {
-                timestamp: 1
+                timestamp: -1
             }}).populate({
             path: 'chat', // field
             model: 'chat', //model
